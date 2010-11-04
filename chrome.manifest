@@ -1,0 +1,4 @@
+content     movetabs     chrome/content/
+skin        movetabs     classic/        chrome/skin/
+
+overlay	chrome://browser/content/browser.xul	chrome://movetabs/content/movetabs.xul

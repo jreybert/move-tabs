@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>move@tabs.net</em:id>
+    <em:name>Move Tabs</em:name>
+    <em:description>Shortcuts for moving tabs</em:description>
+    <em:creator>Jerome</em:creator>
+    <em:version>0.2</em:version>
+    <em:iconURL>chrome://movetabs/skin/icon_32x32.png</em:iconURL>
+    <em:optionsURL>chrome://movetabs/content/options.xul</em:optionsURL>        
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
+        <em:minVersion>3.5</em:minVersion>
+        <em:maxVersion>4.0b7pre</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>      
+</RDF>
+

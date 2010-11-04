@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?> 
+
+<prefwindow id="movetabsPreferences" title="" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"> 
+
+<prefpane id="optionsPane" onpaneload="com_jreybert_movetabs_options.init()" label="Options Moev tabs">
+	<script src="chrome://movetabs/content/options.js" />
+
+<groupbox>
+          <caption label="Raccourcis" />
+              <label value="Next tab"/><label id="l_next" value="" disabled="false"/>
+              <label value="Prev tab"/><label id="l_prev" value="" disabled="false"/>
+              <label value="First tab"/><label id="l_first" value="" disabled="false"/>
+              <label value="Last tab"/><label id="l_last" value="" disabled="false"/>
+        </groupbox>
+</prefpane>
+
+</prefwindow>
+

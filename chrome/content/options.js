@@ -198,11 +198,20 @@ _movetabs_o.butt_cancel_fc = function(c) {
   curr_tb.value = _movetabs_o.old_sc;
   _movetabs_o.default_prefpanel();
 }
+
 /*
    ---------------------------------------------------------------------------
    KEY-MAPS
+   From qooxdoo - the new era of web development
+   http://qooxdoo.org
+   Copyright:
+     2004-2007 1&1 Internet AG, Germany, http://www.1and1.org
+   License:
+     LGPL: http://www.gnu.org/licenses/lgpl.html
+     EPL: http://www.eclipse.org/org/documents/epl-v10.php
    ---------------------------------------------------------------------------
    */
+
 /** maps the keycodes of non printable keys to key identifiers */
 _movetabs_o._keyCodeToIdentifierMap = {
   8  : "Backspace", // The Backspace (Back) key.

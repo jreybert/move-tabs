@@ -2,14 +2,10 @@
 if ("undefined" == typeof(_movetabs_o)) {
   var _movetabs_o = {};
 }
-_movetabs_o.l_next = {};
-_movetabs_o.l_prev = {};
-_movetabs_o.l_first = {};
-_movetabs_o.l_last = {};
-_movetabs_o.is_ctrl = false;
-_movetabs_o.is_shift = false;
-_movetabs_o.is_alt = false;
-_movetabs_o.is_meta = false;
+
+// Array for pressed keys:           [ctrl] [shift] [alt]  [meta]
+_movetabs_o.keys_pressed = new Array(false, false,  false, false);
+_movetabs_o.keys_string  = new Array("<C>", "<S>", "<A>" , "<M>");
 _movetabs_o.char_code = "";
 
 _movetabs_o.list_shortcuts = new Array("next", "prev", "first", "last");
@@ -18,74 +14,38 @@ _movetabs_o.old_sc = "";
 _movetabs_o.print_lab = false;
 _movetabs_o.written_lab = {};
 
-_movetabs_o.print_label = function() {
-  var tmp = "";
-  if ( _movetabs_o.is_shift ) {
-    tmp += "<S>";
+_movetabs_o.pressed_to_string = function() {
+  var ret_string = "";
+  for ( i in _movetabs_o.keys_pressed ) {
+    if ( _movetabs_o.keys_pressed[i] ) {
+      ret_string += _movetabs_o.keys_string[i];
+    }
   }
-  if ( _movetabs_o.is_ctrl ) {
-    tmp += "<C>";
-  }
-  if ( _movetabs_o.is_alt ) {
-    tmp += "<A>";
-  }
-  if ( _movetabs_o.is_meta ) {
-    tmp += "<M>";
-  }
-  //tmp += _movetabs_o.char_code;
-  tmp += _movetabs_o._keyCodeToIdentifierMap[_movetabs_o.char_code];
-
-  if (_movetabs_o.print_lab) {
-    _movetabs_o.written_lab.value = tmp;
-  }
+  ret_string += _movetabs_o._keyCodeToIdentifierMap[_movetabs_o.char_code];
+  return ret_string;
 }
 
 _movetabs_o.pref_to_string = function(pref_array) {
   var tmp = "";
-  if ( pref_array[0] == 1 ) {
-    tmp += "<C>";
+  for ( i in _movetabs_o.keys_pressed ) {
+    if ( pref_array[i] == 1 ) {
+      tmp += _movetabs_o.keys_string[i];
+    }
   }
-  if ( pref_array[1] == 1 ) {
-    tmp += "<S>";
-  }
-  if ( pref_array[2] == 1 ) {
-    tmp += "<A>";
-  }
-  if ( pref_array[3] == 1 ) {
-    tmp += "<M>";
-  }
-  //tmp += _movetabs_o.char_code;
   tmp += _movetabs_o._keyCodeToIdentifierMap[ pref_array[4] ];
   return tmp;
-  //      _movetabs_o.kkeys.value = tmp;
 }
+
 _movetabs_o.print_pref = function() {
   var tmp = "";
-  if ( _movetabs_o.is_shift ) {
-    tmp += "1:";
+  for ( i in _movetabs_o.keys_pressed ) {
+    if ( _movetabs_o.keys_pressed[i] ) {
+      tmp += "1:";
+    }
+    else {
+      tmp += "0:";
+    }
   }
-  else {
-    tmp += "0:";
-  }
-  if ( _movetabs_o.is_ctrl ) {
-    tmp += "1:";
-  }
-  else {
-    tmp += "0:";
-  }
-  if ( _movetabs_o.is_alt ) {
-    tmp += "1:";
-  }
-  else {
-    tmp += "0:";
-  }
-  if ( _movetabs_o.is_meta ) {
-    tmp += "1:";
-  }
-  else {
-    tmp += "0:";
-  }
-  //tmp += _movetabs_o.char_code;
   tmp += _movetabs_o.char_code;
   return tmp;
 }
@@ -115,25 +75,25 @@ _movetabs_o.keyup = function(e) {
 }
 
 _movetabs_o.keydown = function(e) {
-    _movetabs_o.is_shift = e.shiftKey;
-    _movetabs_o.is_ctrl = e.ctrlKey;
-    _movetabs_o.is_meta = e.metaKey;
-    _movetabs_o.is_alt = e.altKey;
+  _movetabs_o.keys_pressed[0] = e.ctrlKey;
+  _movetabs_o.keys_pressed[1] = e.shiftKey;
+  _movetabs_o.keys_pressed[2] = e.metaKey;
+  _movetabs_o.keys_pressed[3] = e.altKey;
   if ( e.keyCode == KeyEvent.DOM_VK_SHIFT ||
         e.keyCode == KeyEvent.DOM_VK_CONTROL ||
         e.keyCode == KeyEvent.DOM_VK_META ||
         e.keyCode == KeyEvent.DOM_VK_ALT ) {
-    if (e.keyCode == KeyEvent.DOM_VK_SHIFT ) {
-      _movetabs_o.is_shift = true;
-    }
     if (e.keyCode == KeyEvent.DOM_VK_CONTROL ) {
-      _movetabs_o.is_ctrl = true;
+      _movetabs_o.keys_pressed[0] = true;
     }
-    if (e.keyCode == KeyEvent.DOM_VK_META ) {
-      _movetabs_o.is_meta = true;
+    if (e.keyCode == KeyEvent.DOM_VK_SHIFT ) {
+      _movetabs_o.keys_pressed[1] = true;
     }
     if (e.keyCode == KeyEvent.DOM_VK_ALT ) {
-      _movetabs_o.is_alt = true;
+      _movetabs_o.keys_pressed[2]  = true;
+    }
+    if (e.keyCode == KeyEvent.DOM_VK_META ) {
+      _movetabs_o.keys_pressed[3] = true;
     }
   }
   else {
@@ -143,12 +103,15 @@ _movetabs_o.keydown = function(e) {
       _movetabs_o.char_code = e.keyCode;
     }
   }
-  _movetabs_o.print_label();
+  if (_movetabs_o.print_lab) {
+    _movetabs_o.written_lab.value = _movetabs_o.pressed_to_string();
+  }
 }
 
 _movetabs_o.init = function() {
   var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 
+  // write preferences in labels
   for ( i in _movetabs_o.list_shortcuts ) {
     var sc = _movetabs_o.list_shortcuts[i];
     var tmp_pref_array = (prefManager.getCharPref('extensions.movetabs.sc_'+sc+'_tab')).split(":");

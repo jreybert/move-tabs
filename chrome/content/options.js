@@ -76,6 +76,9 @@ _movetabs_o.keyup = function(e) {
 }
 
 _movetabs_o.keydown = function(e) {
+  if (!_movetabs_o.print_lab) {
+    return;
+  }
   _movetabs_o.any_key_pressed = true;
   _movetabs_o.keys_pressed[0] = e.ctrlKey;
   _movetabs_o.keys_pressed[1] = e.shiftKey;
@@ -99,15 +102,20 @@ _movetabs_o.keydown = function(e) {
     }
   }
   else {
-    if (e.which != 0 && e.charCode != 0) {
-      //_movetabs_o.char_code = String.fromCharCode(e.charCode);
-    } else {
-      _movetabs_o.char_code = e.keyCode;
+    if ( (e.keyCode >= _movetabs_o._charCodeA && e.keyCode <= _movetabs_o._charCodeZ) ||
+    (e.keyCode >= _movetabs_o._charCode0 && e.keyCode <= _movetabs_o._charCode9) ) {
+      alert("You can not use alphanumeric keys in your shortcut.");
+      _movetabs_o.char_code = "";
+    }
+    else {
+      if (e.which != 0 && e.charCode != 0) {
+        //_movetabs_o.char_code = String.fromCharCode(e.charCode);
+      } else {
+        _movetabs_o.char_code = e.keyCode;
+      }
     }
   }
-  if (_movetabs_o.print_lab) {
-    _movetabs_o.written_lab.value = _movetabs_o.pressed_to_string();
-  }
+  _movetabs_o.written_lab.value = _movetabs_o.pressed_to_string();
 }
 
 _movetabs_o.init = function() {
@@ -258,3 +266,9 @@ _movetabs_o._keyCodeToIdentifierMap = {
   110 : ",".charCodeAt(0),
   111 : "/".charCodeAt(0)
 }
+
+_movetabs_o._charCodeA = "A".charCodeAt(0);
+_movetabs_o._charCodeZ = "Z".charCodeAt(0);
+_movetabs_o._charCode0 = "0".charCodeAt(0);
+_movetabs_o._charCode9 = "9".charCodeAt(0);
+

@@ -8,11 +8,13 @@ _movetabs_o.keys_pressed = new Array(false, false,  false, false);
 _movetabs_o.keys_string  = new Array("<C>", "<S>", "<A>" , "<M>");
 _movetabs_o.char_code = "";
 
+
 _movetabs_o.list_shortcuts = new Array("next", "prev", "first", "last");
 
 _movetabs_o.old_sc = "";
 _movetabs_o.print_lab = false;
 _movetabs_o.written_lab = {};
+_movetabs_o.any_key_pressed = false;
 
 _movetabs_o.pressed_to_string = function() {
   var ret_string = "";
@@ -69,12 +71,12 @@ _movetabs_o.keyup = function(e) {
   else {
     _movetabs_o.char_code = "";
   }
-
   _movetabs_o.print_label();
   */
 }
 
 _movetabs_o.keydown = function(e) {
+  _movetabs_o.any_key_pressed = true;
   _movetabs_o.keys_pressed[0] = e.ctrlKey;
   _movetabs_o.keys_pressed[1] = e.shiftKey;
   _movetabs_o.keys_pressed[2] = e.metaKey;
@@ -110,7 +112,6 @@ _movetabs_o.keydown = function(e) {
 
 _movetabs_o.init = function() {
   var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-
   // write preferences in labels
   for ( i in _movetabs_o.list_shortcuts ) {
     var sc = _movetabs_o.list_shortcuts[i];
@@ -118,9 +119,12 @@ _movetabs_o.init = function() {
     var tmp_butt = document.getElementById("label_"+sc);
     tmp_butt.value = _movetabs_o.pref_to_string(tmp_pref_array);
   }
-
   //window.addEventListener("keyup", _movetabs_o.keyup, true);
   window.addEventListener("keydown", _movetabs_o.keydown, false);
+}
+
+window.onunload = function() {
+  window.removeEventListener("keydown", _movetabs_o.keydown, false);
 }
 
 _movetabs_o.butt_set_fc = function(c) {
@@ -136,6 +140,7 @@ _movetabs_o.butt_set_fc = function(c) {
   _movetabs_o.old_sc = curr_tb.value;
   _movetabs_o.written_lab = curr_tb;
   _movetabs_o.print_lab = true;
+  _movetabs_o.any_key_pressed = false;
 }
 
 _movetabs_o.default_prefpanel = function() {
@@ -146,20 +151,22 @@ _movetabs_o.default_prefpanel = function() {
     document.getElementById("butt_ok_"+sc).disabled=true;
     document.getElementById("butt_cancel_"+sc).disabled=true;
   }
-}
-_movetabs_o.butt_ok_fc = function(c) {
-  var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-  prefManager.setCharPref('extensions.movetabs.sc_'+c+'_tab', _movetabs_o.print_pref());
-  _movetabs_o.default_prefpanel();
   _movetabs_o.print_lab = false;
+  _movetabs_o.any_key_pressed = false;
+}
+
+_movetabs_o.butt_ok_fc = function(c) {
+  if ( _movetabs_o.any_key_pressed ) {
+    var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+    prefManager.setCharPref('extensions.movetabs.sc_'+c+'_tab', _movetabs_o.print_pref());
+  }
+  _movetabs_o.default_prefpanel();
 }
 
 _movetabs_o.butt_cancel_fc = function(c) {
   var curr_tb = document.getElementById("label_"+c);
   curr_tb.value = _movetabs_o.old_sc;
   _movetabs_o.default_prefpanel();
-  _movetabs_o.written_lab = curr_tb;
-  _movetabs_o.print_lab = false;
 }
 /*
    ---------------------------------------------------------------------------

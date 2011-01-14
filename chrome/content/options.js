@@ -152,7 +152,7 @@ _movetabs_o.init = function() {
   for ( i in _movetabs_o.list_shortcuts ) {
     var sc = _movetabs_o.list_shortcuts[i];
     var tmp_pref_array = (prefManager.getCharPref('extensions.movetabs.sc_'+sc+'_tab')).split(":");
-    var tmp_butt = document.getElementById("l_"+sc);
+    var tmp_butt = document.getElementById("label_"+sc);
     tmp_butt.value = _movetabs_o.pref_to_string(tmp_pref_array);
   }
 
@@ -160,16 +160,16 @@ _movetabs_o.init = function() {
   window.addEventListener("keydown", _movetabs_o.keydown, false);
 }
 
-_movetabs_o.set_shortcut = function(c) {
+_movetabs_o.butt_set_fc = function(c) {
   for ( i in _movetabs_o.list_shortcuts ) {
     var sc = _movetabs_o.list_shortcuts[i];
-    document.getElementById("b_set_"+sc).disabled=true;
-    document.getElementById("l_"+sc).disabled=true;
+    document.getElementById("butt_set_"+sc).disabled=true;
+    document.getElementById("label_"+sc).disabled=true;
   }
-  document.getElementById("b_ok_"+c).disabled=false;
-  document.getElementById("b_cancel_"+c).disabled=false;
-  document.getElementById("l_"+c).disabled=false;
-  var curr_tb = document.getElementById("l_"+c);
+  document.getElementById("butt_ok_"+c).disabled=false;
+  document.getElementById("butt_cancel_"+c).disabled=false;
+  document.getElementById("label_"+c).disabled=false;
+  var curr_tb = document.getElementById("label_"+c);
   _movetabs_o.old_sc = curr_tb.value;
   _movetabs_o.written_lab = curr_tb;
   _movetabs_o.print_lab = true;
@@ -178,20 +178,20 @@ _movetabs_o.set_shortcut = function(c) {
 _movetabs_o.default_prefpanel = function() {
   for ( i in _movetabs_o.list_shortcuts ) {
     var sc = _movetabs_o.list_shortcuts[i];
-    document.getElementById("b_set_"+sc).disabled=false;
-    document.getElementById("l_"+sc).disabled=true;
-    document.getElementById("b_ok_"+sc).disabled=true;
-    document.getElementById("b_cancel_"+sc).disabled=true;
+    document.getElementById("butt_set_"+sc).disabled=false;
+    document.getElementById("label_"+sc).disabled=true;
+    document.getElementById("butt_ok_"+sc).disabled=true;
+    document.getElementById("butt_cancel_"+sc).disabled=true;
   }
 }
-_movetabs_o.ok_shortcut = function(c) {
+_movetabs_o.butt_ok_fc = function(c) {
   var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
   prefManager.setCharPref('extensions.movetabs.sc_'+c+'_tab', _movetabs_o.print_pref());
   _movetabs_o.default_prefpanel();
 }
 
-_movetabs_o.cancel_shortcut = function(c) {
-  var curr_tb = document.getElementById("l_"+c);
+_movetabs_o.butt_cancel_fc = function(c) {
+  var curr_tb = document.getElementById("label_"+c);
   curr_tb.value = _movetabs_o.old_sc;
   _movetabs_o.default_prefpanel();
 }

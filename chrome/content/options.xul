@@ -15,31 +15,31 @@
     <rows>
       <row>
         <label value="Next tab"/>
-        <label  value=""    id="l_next"                                                         disabled="true"/>
-        <button label="Set" id="b_set_next"     oncommand="_movetabs_o.set_shortcut('next')"    disabled="false"/>
-        <button label="OK"  id="b_ok_next"      oncommand="_movetabs_o.ok_shortcut('next')"     disabled="true"/>
-        <button label="Cancel"    id="b_cancel_next"  oncommand="_movetabs_o.cancel_shortcut('next')" disabled="true"/>
+        <label  value=""    id="label_next"                                                         disabled="true"/>
+        <button label="Set" id="butt_set_next"     oncommand="_movetabs_o.butt_set_fc('next')"    disabled="false"/>
+        <button label="OK"  id="butt_ok_next"      oncommand="_movetabs_o.butt_ok_fc('next')"     disabled="true"/>
+        <button label="Cancel"    id="butt_cancel_next"  oncommand="_movetabs_o.butt_cancel_fc('next')" disabled="true"/>
       </row>
       <row>
         <label value="Prev tab"/>
-        <label  value=""    id="l_prev"                                                         disabled="true"/>
-        <button label="Set" id="b_set_prev"     oncommand="_movetabs_o.set_shortcut('prev')"    disabled="false"/>
-        <button label="OK"  id="b_ok_prev"      oncommand="_movetabs_o.ok_shortcut('prev')"     disabled="true"/>
-        <button label="Cancel"    id="b_cancel_prev"  oncommand="_movetabs_o.cancel_shortcut('prev')" disabled="true"/>
+        <label  value=""    id="label_prev"                                                         disabled="true"/>
+        <button label="Set" id="butt_set_prev"     oncommand="_movetabs_o.butt_set_fc('prev')"    disabled="false"/>
+        <button label="OK"  id="butt_ok_prev"      oncommand="_movetabs_o.butt_ok_fc('prev')"     disabled="true"/>
+        <button label="Cancel"    id="butt_cancel_prev"  oncommand="_movetabs_o.butt_cancel_fc('prev')" disabled="true"/>
       </row>
       <row>
         <label value="First tab"/>
-        <label  value=""    id="l_first"                                                          disabled="true"/>
-        <button label="Set" id="b_set_first"     oncommand="_movetabs_o.set_shortcut('first')"    disabled="false"/>
-        <button label="OK"  id="b_ok_first"      oncommand="_movetabs_o.ok_shortcut('first')"     disabled="true"/>
-        <button label="Cancel"    id="b_cancel_first"  oncommand="_movetabs_o.cancel_shortcut('first')" disabled="true"/>
+        <label  value=""    id="label_first"                                                          disabled="true"/>
+        <button label="Set" id="butt_set_first"     oncommand="_movetabs_o.butt_set_fc('first')"    disabled="false"/>
+        <button label="OK"  id="butt_ok_first"      oncommand="_movetabs_o.butt_ok_fc('first')"     disabled="true"/>
+        <button label="Cancel"    id="butt_cancel_first"  oncommand="_movetabs_o.butt_cancel_fc('first')" disabled="true"/>
       </row>
       <row>
         <label value="Last tab"/>
-        <label  value=""    id="l_last"                                                         disabled="true"/>
-        <button label="Set" id="b_set_last"     oncommand="_movetabs_o.set_shortcut('last')"    disabled="false"/>
-        <button label="OK"  id="b_ok_last"      oncommand="_movetabs_o.ok_shortcut('last')"     disabled="true"/>
-        <button label="Cancel"    id="b_cancel_last"  oncommand="_movetabs_o.cancel_shortcut('last')" disabled="true"/>
+        <label  value=""    id="label_last"                                                         disabled="true"/>
+        <button label="Set" id="butt_set_last"     oncommand="_movetabs_o.butt_set_fc('last')"    disabled="false"/>
+        <button label="OK"  id="butt_ok_last"      oncommand="_movetabs_o.butt_ok_fc('last')"     disabled="true"/>
+        <button label="Cancel"    id="butt_cancel_last"  oncommand="_movetabs_o.butt_cancel_fc('last')" disabled="true"/>
       </row>
     </rows>
   </grid>

@@ -151,12 +151,15 @@ _movetabs_o.butt_ok_fc = function(c) {
   var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
   prefManager.setCharPref('extensions.movetabs.sc_'+c+'_tab', _movetabs_o.print_pref());
   _movetabs_o.default_prefpanel();
+  _movetabs_o.print_lab = false;
 }
 
 _movetabs_o.butt_cancel_fc = function(c) {
   var curr_tb = document.getElementById("label_"+c);
   curr_tb.value = _movetabs_o.old_sc;
   _movetabs_o.default_prefpanel();
+  _movetabs_o.written_lab = curr_tb;
+  _movetabs_o.print_lab = false;
 }
 /*
    ---------------------------------------------------------------------------

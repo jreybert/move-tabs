@@ -1,14 +1,15 @@
-
+// Define our option panel namespace
 if ("undefined" == typeof(_movetabs_o)) {
   var _movetabs_o = {};
 }
 
+// Memory of pressed keys
 // Array for pressed keys:           [ctrl] [shift] [alt]  [meta]
 _movetabs_o.keys_pressed = new Array(false, false,  false, false);
-_movetabs_o.keys_string  = new Array("<C>", "<S>", "<A>" , "<M>");
 _movetabs_o.char_code = "";
 
-
+_movetabs_o.keys_string  = new Array("<C>", "<S>", "<A>" , "<M>");
+// list of shorcuts. these strings will be mainly used to access XUL elements, in a for loop
 _movetabs_o.list_shortcuts = new Array("next", "prev", "first", "last");
 
 _movetabs_o.old_sc = "";
@@ -118,6 +119,7 @@ _movetabs_o.keydown = function(e) {
   _movetabs_o.written_lab.value = _movetabs_o.pressed_to_string();
 }
 
+// Initialization of the option panel
 _movetabs_o.init = function() {
   var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
   // write preferences in labels
@@ -135,22 +137,36 @@ window.onunload = function() {
   window.removeEventListener("keydown", _movetabs_o.keydown, false);
 }
 
+// Function called by set button
 _movetabs_o.butt_set_fc = function(c) {
+  // Set XUL panel, enable and disable specific buttons and labels
+  // disable all set buttons and shortcut labels
   for ( i in _movetabs_o.list_shortcuts ) {
     var sc = _movetabs_o.list_shortcuts[i];
     document.getElementById("butt_set_"+sc).disabled=true;
     document.getElementById("label_"+sc).disabled=true;
   }
+  // enable OK and cancel buttons and shortcut label for the current setted shortcut
   document.getElementById("butt_ok_"+c).disabled=false;
   document.getElementById("butt_cancel_"+c).disabled=false;
   document.getElementById("label_"+c).disabled=false;
+
   var curr_tb = document.getElementById("label_"+c);
+  // remember the current shortcut string (in case of cancel)
   _movetabs_o.old_sc = curr_tb.value;
+  // set the pointed label to print to the ongoing shortcut
   _movetabs_o.written_lab = curr_tb;
-  _movetabs_o.print_lab = true;
+
+  // Initialize shortcut listener
   _movetabs_o.any_key_pressed = false;
+  for ( i in _movetabs_o.keys_pressed ) {
+    _movetabs_o.keys_pressed[i] = false;
+    char_code = "";
+  }
+  _movetabs_o.print_lab = true;
 }
 
+// This function set the panel by default (all Set buttons enabled, all others disabled)
 _movetabs_o.default_prefpanel = function() {
   for ( i in _movetabs_o.list_shortcuts ) {
     var sc = _movetabs_o.list_shortcuts[i];
@@ -163,7 +179,11 @@ _movetabs_o.default_prefpanel = function() {
   _movetabs_o.any_key_pressed = false;
 }
 
+// Function called by OK button
 _movetabs_o.butt_ok_fc = function(c) {
+  // If any key has been pressed (which should have update the label), we can update the prefManager
+  // In movetabs.js, _movetabs class, an observer is plugged on extensions.movetabs). At every change, the _movetabs class update its own variables
+  // If none key have been pressed, we do not do anything beside reset the panel on default state
   if ( _movetabs_o.any_key_pressed ) {
     var prefManager = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
     prefManager.setCharPref('extensions.movetabs.sc_'+c+'_tab', _movetabs_o.print_pref());
@@ -171,7 +191,9 @@ _movetabs_o.butt_ok_fc = function(c) {
   _movetabs_o.default_prefpanel();
 }
 
+// function called by Cancel button
 _movetabs_o.butt_cancel_fc = function(c) {
+  // We print back the old value (as we cancel the current shortcut)
   var curr_tb = document.getElementById("label_"+c);
   curr_tb.value = _movetabs_o.old_sc;
   _movetabs_o.default_prefpanel();

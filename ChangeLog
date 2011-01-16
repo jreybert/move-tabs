@@ -1,0 +1,9 @@
+Move Tabs 0.3 (2011-01-14)
+		* New feature: option panel to choose the shortcuts
+
+Move Tabs 0.2 (2010-07-24)
+		* First public release
+		* Nomination requirement: In order to prevent conflicts with other add-ons
+		that may be installed by users, you need to wrap your "lose" variables and
+		functions within a JavaScript object
+		* Fix: a bug prevented to close tabs

@@ -1,11 +1,11 @@
-New shortcuts to move the tabs into firefox
+Define your own shortcuts to move the tabs into firefox
 
 Overview
 --------
 
 Since Firefox 3.5, move a tab in the tab bar using the keyboard became a problem. You must have the focus on the tab bar in order to make the shortcuts **Ctrl Left** and **Ctrl Right** work, and click is not enough. To do so, the easiest way is **Ctrl k** to focus the search toolbar then **Tab** to focus the tab bar.
 
-This "solution" is just a work around, and a little bit too coplicated to only move a simple tab. This plugin adds 4 new shortcuts, which do not depend on any focus:
+This "solution" is just a work around, and a little bit too coplicated to only move a simple tab. This plugin allows you to choose your own shortcuts to move the tabs. Defaults shortcuts are:
 
  - **Ctrl Shift** + **PageUp** or **PageDown** to move along the tab bar.
  - **Ctrl Shift** + **Home** or **End** to move at both ends.

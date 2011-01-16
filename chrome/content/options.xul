@@ -3,47 +3,51 @@
 
 <prefwindow id="movetabsPreferences" title="" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"> 
 
-<prefpane id="optionsPane" onpaneload="_movetabs_o.init()" label="Options Move tabs">
-  <script src="chrome://movetabs/content/options.js" />
+  <prefpane id="optionsPane" onpaneload="_movetabs_o.init()" label="Options Move tabs">
+    <script src="chrome://movetabs/content/options.js" />
 
-  <grid>
-    <columns>
-      <column/>
-      <column flex="1"/>
-      <column/>
-    </columns>
-    <rows>
-      <row>
-        <label value="Next tab"/>
-        <label  value=""    id="label_next"                                                         disabled="true"/>
-        <button label="Set" id="butt_set_next"     oncommand="_movetabs_o.butt_set_fc('next')"    disabled="false"/>
-        <button label="OK"  id="butt_ok_next"      oncommand="_movetabs_o.butt_ok_fc('next')"     disabled="true"/>
-        <button label="Cancel"    id="butt_cancel_next"  oncommand="_movetabs_o.butt_cancel_fc('next')" disabled="true"/>
-      </row>
-      <row>
-        <label value="Prev tab"/>
-        <label  value=""    id="label_prev"                                                         disabled="true"/>
-        <button label="Set" id="butt_set_prev"     oncommand="_movetabs_o.butt_set_fc('prev')"    disabled="false"/>
-        <button label="OK"  id="butt_ok_prev"      oncommand="_movetabs_o.butt_ok_fc('prev')"     disabled="true"/>
-        <button label="Cancel"    id="butt_cancel_prev"  oncommand="_movetabs_o.butt_cancel_fc('prev')" disabled="true"/>
-      </row>
-      <row>
-        <label value="First tab"/>
-        <label  value=""    id="label_first"                                                          disabled="true"/>
-        <button label="Set" id="butt_set_first"     oncommand="_movetabs_o.butt_set_fc('first')"    disabled="false"/>
-        <button label="OK"  id="butt_ok_first"      oncommand="_movetabs_o.butt_ok_fc('first')"     disabled="true"/>
-        <button label="Cancel"    id="butt_cancel_first"  oncommand="_movetabs_o.butt_cancel_fc('first')" disabled="true"/>
-      </row>
-      <row>
-        <label value="Last tab"/>
-        <label  value=""    id="label_last"                                                         disabled="true"/>
-        <button label="Set" id="butt_set_last"     oncommand="_movetabs_o.butt_set_fc('last')"    disabled="false"/>
-        <button label="OK"  id="butt_ok_last"      oncommand="_movetabs_o.butt_ok_fc('last')"     disabled="true"/>
-        <button label="Cancel"    id="butt_cancel_last"  oncommand="_movetabs_o.butt_cancel_fc('last')" disabled="true"/>
-      </row>
-    </rows>
-  </grid>
-</prefpane>
+    <titledbox orient="vertical">
+      <title><text value="Define your own shortcuts"/></title>
+      <label value="Clic on Set then press keys. (alphanumeric keys not allowed)"/>
+      <grid>
+        <columns>
+          <column/>
+          <column flex="1"/>
+          <column/>
+        </columns>
+        <rows>
+          <row>
+            <label value="Next tab"/>
+            <label  value=""    id="label_next"                                                         disabled="true"/>
+            <button label="Set" id="butt_set_next"     oncommand="_movetabs_o.butt_set_fc('next')"    disabled="false"/>
+            <button label="OK"  id="butt_ok_next"      oncommand="_movetabs_o.butt_ok_fc('next')"     disabled="true"/>
+            <button label="Cancel"    id="butt_cancel_next"  oncommand="_movetabs_o.butt_cancel_fc('next')" disabled="true"/>
+          </row>
+          <row>
+            <label value="Prev tab"/>
+            <label  value=""    id="label_prev"                                                         disabled="true"/>
+            <button label="Set" id="butt_set_prev"     oncommand="_movetabs_o.butt_set_fc('prev')"    disabled="false"/>
+            <button label="OK"  id="butt_ok_prev"      oncommand="_movetabs_o.butt_ok_fc('prev')"     disabled="true"/>
+            <button label="Cancel"    id="butt_cancel_prev"  oncommand="_movetabs_o.butt_cancel_fc('prev')" disabled="true"/>
+          </row>
+          <row>
+            <label value="First tab"/>
+            <label  value=""    id="label_first"                                                          disabled="true"/>
+            <button label="Set" id="butt_set_first"     oncommand="_movetabs_o.butt_set_fc('first')"    disabled="false"/>
+            <button label="OK"  id="butt_ok_first"      oncommand="_movetabs_o.butt_ok_fc('first')"     disabled="true"/>
+            <button label="Cancel"    id="butt_cancel_first"  oncommand="_movetabs_o.butt_cancel_fc('first')" disabled="true"/>
+          </row>
+          <row>
+            <label value="Last tab"/>
+            <label  value=""    id="label_last"                                                         disabled="true"/>
+            <button label="Set" id="butt_set_last"     oncommand="_movetabs_o.butt_set_fc('last')"    disabled="false"/>
+            <button label="OK"  id="butt_ok_last"      oncommand="_movetabs_o.butt_ok_fc('last')"     disabled="true"/>
+            <button label="Cancel"    id="butt_cancel_last"  oncommand="_movetabs_o.butt_cancel_fc('last')" disabled="true"/>
+          </row>
+        </rows>
+      </grid>
+    </titledbox>
+  </prefpane>
 
 </prefwindow>
 

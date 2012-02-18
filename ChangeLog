@@ -1,6 +1,6 @@
 Move Tabs 0.4 (2012-02-18)
 		* New feature : Alphanumeric hotkeys are now allowed
-		* Fix : Fixed the inversion between Alt and Meta key when setting the hotkey in option window
+		* Fix : Fixed the inversion between Alt and Meta keys when setting a hotkey in option window
 
 Move Tabs 0.3 (2011-01-14)
 		* New feature: option panel to choose the shortcuts

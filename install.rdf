@@ -6,14 +6,14 @@
     <em:name>Move Tabs</em:name>
     <em:description>Shortcuts for moving tabs</em:description>
     <em:creator>Jerome</em:creator>
-    <em:version>0.3</em:version>
+    <em:version>0.4</em:version>
     <em:iconURL>chrome://movetabs/skin/icon_32x32.png</em:iconURL>
     <em:optionsURL>chrome://movetabs/content/options.xul</em:optionsURL>        
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
         <em:minVersion>3.5</em:minVersion>
-        <em:maxVersion>4.0</em:maxVersion>
+        <em:maxVersion>13.0</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>      

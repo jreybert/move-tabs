@@ -3,14 +3,15 @@ if ("undefined" == typeof(com_jreybert_movetabs)) {
 }
 
 _movetabs.movetabs2 = function(e) {
-  //      alert(sc_next_tab[0] + ":" + sc_next_tab[1] + ":" + sc_next_tab[2] + ":" + sc_next_tab[3] + ":" + sc_next_tab[4]);
-  //    next tab
+  // alert(sc_next_tab[0] + ":" + sc_next_tab[1] + ":" + sc_next_tab[2] + ":" + sc_next_tab[3] + ":" + sc_next_tab[4]);
+  // alert( e.ctrlKey + ":" + e.shiftKey +  ":" + e.altKey + ":" + e.metaKey + ":" + e.charCode + "/" + e.keyCode );
 
+  //    next tab
   if (e.ctrlKey == _movetabs.prefObs.sc_next_tab[0] &&
         e.shiftKey == _movetabs.prefObs.sc_next_tab[1] &&
         e.altKey == _movetabs.prefObs.sc_next_tab[2] &&
         e.metaKey == _movetabs.prefObs.sc_next_tab[3] &&
-        e.keyCode ==_movetabs.prefObs.sc_next_tab[4] ) {
+        ( e.keyCode == _movetabs.prefObs.sc_next_tab[4] || e.charCode == _movetabs.prefObs.sc_next_tab[4] ) ) {
     if (gBrowser.tabContainer.selectedIndex + 1 >= gBrowser.tabContainer.itemCount)
     gBrowser.moveTabTo(gBrowser.tabContainer.selectedItem, 0);
     else
@@ -22,7 +23,7 @@ _movetabs.movetabs2 = function(e) {
         e.shiftKey == _movetabs.prefObs.sc_prev_tab[1] &&
         e.altKey == _movetabs.prefObs.sc_prev_tab[2] &&
         e.metaKey == _movetabs.prefObs.sc_prev_tab[3] &&
-        e.keyCode ==_movetabs.prefObs.sc_prev_tab[4] ) {
+        ( e.keyCode == _movetabs.prefObs.sc_prev_tab[4] || e.charCode == _movetabs.prefObs.sc_prev_tab[4] ) ) {
     if (gBrowser.tabContainer.selectedIndex - 1 < 0)
     gBrowser.moveTabTo(gBrowser.tabContainer.selectedItem, gBrowser.tabContainer.itemCount);
     else
@@ -34,7 +35,7 @@ _movetabs.movetabs2 = function(e) {
         e.shiftKey == _movetabs.prefObs.sc_first_tab[1] &&
         e.altKey == _movetabs.prefObs.sc_first_tab[2] &&
         e.metaKey == _movetabs.prefObs.sc_first_tab[3] &&
-        e.keyCode ==_movetabs.prefObs.sc_first_tab[4] ) {
+        ( e.keyCode ==_movetabs.prefObs.sc_first_tab[4] || e.charCode == _movetabs.prefObs.sc_first_tab[4] ) ) {
     gBrowser.moveTabTo(gBrowser.tabContainer.selectedItem, 0);
   }
 
@@ -43,7 +44,7 @@ _movetabs.movetabs2 = function(e) {
         e.shiftKey  == _movetabs.prefObs.sc_last_tab[1] &&
         e.altKey == _movetabs.prefObs.sc_last_tab[2] &&
         e.metaKey == _movetabs.prefObs.sc_last_tab[3] &&
-        e.keyCode ==_movetabs.prefObs.sc_last_tab[4] ) {
+        ( e.keyCode ==_movetabs.prefObs.sc_last_tab[4] || e.charCode == _movetabs.prefObs.sc_last_tab[4] ) ) {
     gBrowser.moveTabTo(gBrowser.tabContainer.selectedItem, gBrowser.tabContainer.itemCount);
   }
 }

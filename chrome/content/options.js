@@ -10,7 +10,7 @@ _movetabs_o.char_code = "";
 
 _movetabs_o.keys_string  = new Array("<C>", "<S>", "<A>" , "<M>");
 // list of shorcuts. these strings will be mainly used to access XUL elements, in a for loop
-_movetabs_o.list_shortcuts = new Array("next", "prev", "first", "last");
+_movetabs_o.list_shortcuts = new Array("prev", "next", "first", "last");
 
 _movetabs_o.old_sc = "";
 _movetabs_o.print_lab = false;
@@ -54,37 +54,15 @@ _movetabs_o.print_pref = function() {
 }
 
 
-
-_movetabs_o.keyup = function(e) {
- /*
-  if (e.keyCode == KeyEvent.DOM_VK_SHIFT ) {
-    _movetabs_o.is_shift = false;
-  }
-  else if (e.keyCode == KeyEvent.DOM_VK_CONTROL ) {
-    _movetabs_o.is_ctrl = false;
-  }
-  else if (e.keyCode == KeyEvent.DOM_VK_META ) {
-    _movetabs_o.is_meta = false;
-  }
-  else if (e.keyCode == KeyEvent.DOM_VK_ALT ) {
-    _movetabs_o.is_alt = false;
-  }
-  else {
-    _movetabs_o.char_code = "";
-  }
-  _movetabs_o.print_label();
-  */
-}
-
-_movetabs_o.keydown = function(e) {
+_movetabs_o.keypress = function(e) {
   if (!_movetabs_o.print_lab) {
     return;
   }
   _movetabs_o.any_key_pressed = true;
   _movetabs_o.keys_pressed[0] = e.ctrlKey;
   _movetabs_o.keys_pressed[1] = e.shiftKey;
-  _movetabs_o.keys_pressed[2] = e.metaKey;
-  _movetabs_o.keys_pressed[3] = e.altKey;
+  _movetabs_o.keys_pressed[2] = e.altKey;
+  _movetabs_o.keys_pressed[3] = e.metaKey;
   if ( e.keyCode == KeyEvent.DOM_VK_SHIFT ||
         e.keyCode == KeyEvent.DOM_VK_CONTROL ||
         e.keyCode == KeyEvent.DOM_VK_META ||
@@ -103,18 +81,7 @@ _movetabs_o.keydown = function(e) {
     }
   }
   else {
-    if ( (e.keyCode >= _movetabs_o._charCodeA && e.keyCode <= _movetabs_o._charCodeZ) ||
-    (e.keyCode >= _movetabs_o._charCode0 && e.keyCode <= _movetabs_o._charCode9) ) {
-      alert("You can not use alphanumeric keys in your shortcut.");
-      _movetabs_o.char_code = "";
-    }
-    else {
-      if (e.which != 0 && e.charCode != 0) {
-        //_movetabs_o.char_code = String.fromCharCode(e.charCode);
-      } else {
-        _movetabs_o.char_code = e.keyCode;
-      }
-    }
+    _movetabs_o.char_code = e.charCode? e.charCode : e.keyCode;
   }
   _movetabs_o.written_lab.value = _movetabs_o.pressed_to_string();
 }
@@ -130,11 +97,11 @@ _movetabs_o.init = function() {
     tmp_butt.value = _movetabs_o.pref_to_string(tmp_pref_array);
   }
   //window.addEventListener("keyup", _movetabs_o.keyup, true);
-  window.addEventListener("keydown", _movetabs_o.keydown, false);
+  window.addEventListener("keypress", _movetabs_o.keypress, false);
 }
 
 window.onunload = function() {
-  window.removeEventListener("keydown", _movetabs_o.keydown, false);
+  window.removeEventListener("keypress", _movetabs_o.keypress, false);
 }
 
 // Function called by set button
@@ -214,29 +181,31 @@ _movetabs_o.butt_cancel_fc = function(c) {
 
 /** maps the keycodes of non printable keys to key identifiers */
 _movetabs_o._keyCodeToIdentifierMap = {
-  8  : "Backspace", // The Backspace (Back) key.
-  9  : "Tab", // The Horizontal Tabulation (Tab) key.
-  32 : "Space", // The Space (Spacebar) key.
-  13  : "Enter", // The Enter key.
-
   //   Note: _movetabs_o key identifier is also used for the
   //   Return (Macintosh numpad) key.
+  8  : "Backspace", // The Backspace (Back) key.
+  9  : "Tab", // The Horizontal Tabulation (Tab) key.
+  13  : "Enter", // The Enter key.
   16  : "Shift", // The Shift key.
   17  : "Control", // The Control (Ctrl) key.
   18  : "Alt", // The Alt (Menu) key.
+  19  : "Pause", // The pause/break key
   20  : "CapsLock", // The CapsLock key
-  224 : "Meta", // The Meta key. (Apple Meta and Windows key)
   27  : "Escape", // The Escape (Esc) key.
-  37  : "Left", // The Left Arrow key.
-  38  : "Up", // The Up Arrow key.
-  39  : "Right", // The Right Arrow key.
-  40  : "Down", // The Down Arrow key.
+  32 : "Space", // The Space (Spacebar) key.
   33  : "PageUp", // The Page Up key.
   34  : "PageDown", // The Page Down (Next) key.
   35  : "End", // The End key.
   36  : "Home", // The Home key.
+  37  : "Left", // The Left Arrow key.
+  38  : "Up", // The Up Arrow key.
+  39  : "Right", // The Right Arrow key.
+  40  : "Down", // The Down Arrow key.
+  44  : "PrintScreen", // The Print Screen (PrintScrn, SnapShot) key.
   45  : "Insert", // The Insert (Ins) key. (Does not fire in Opera/Win)
   46  : "Delete", // The Delete (Del) Key.
+  91  : "Win", // The Windows Logo key
+  93  : "Apps", // The Application key (Windows Context Menu)
   112 : "F1", // The F1 key.
   113 : "F2", // The F2 key.
   114 : "F3", // The F3 key.
@@ -250,11 +219,18 @@ _movetabs_o._keyCodeToIdentifierMap = {
   122 : "F11", // The F11 key.
   123 : "F12", // The F12 key.
   144 : "NumLock", // The Num Lock key.
-  44  : "PrintScreen", // The Print Screen (PrintScrn, SnapShot) key.
   145 : "Scroll", // The scroll lock key
-  19  : "Pause", // The pause/break key
-  91  : "Win", // The Windows Logo key
-  93  : "Apps", // The Application key (Windows Context Menu)
+  224 : "Meta", // The Meta key. (Apple Meta and Windows key)
+  48  : "0",
+  49  : "1",
+  50  : "2",
+  51  : "3",
+  52  : "4",
+  53  : "5",
+  54  : "6",
+  55  : "7",
+  56  : "8",
+  57  : "9",
   65  : "A",
   66  : "B",
   67  : "C",
@@ -281,21 +257,36 @@ _movetabs_o._keyCodeToIdentifierMap = {
   88  : "X",
   89  : "Y",
   90  : "Z",
-  96  : "0".charCodeAt(0),
-  97  : "1".charCodeAt(0),
-  98  : "2".charCodeAt(0),
-  99  : "3".charCodeAt(0),
-  100 : "4".charCodeAt(0),
-  101 : "5".charCodeAt(0),
-  102 : "6".charCodeAt(0),
-  103 : "7".charCodeAt(0),
-  104 : "8".charCodeAt(0),
-  105 : "9".charCodeAt(0),
-  106 : "*".charCodeAt(0),
-  107 : "+".charCodeAt(0),
-  109 : "-".charCodeAt(0),
-  110 : ",".charCodeAt(0),
-  111 : "/".charCodeAt(0)
+  91  : "[",
+  93  : "]",
+  97  : "a",
+  98  : "b",
+  99  : "c",
+  100  : "d",
+  101  : "e",
+  102  : "f",
+  103  : "g",
+  104  : "h",
+  105  : "i",
+  106  : "j",
+  107  : "k",
+  108  : "l",
+  109  : "m",
+  110  : "n",
+  111  : "o",
+  112  : "p",
+  113  : "q",
+  114  : "r",
+  115  : "s",
+  116  : "t",
+  117  : "u",
+  118  : "v",
+  119  : "w",
+  120  : "x",
+  121  : "y",
+  122  : "z",
+  123  : "{",
+  125  : "}",
 }
 
 _movetabs_o._charCodeA = "A".charCodeAt(0);

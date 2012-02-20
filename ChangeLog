@@ -1,11 +1,11 @@
-Move Tabs 0.4 (2012-02-18)
+Move Tabs 0.4 (2012-02-18): Renaud Merle <rndmerle@gmail.com>
 		* New feature : Alphanumeric hotkeys are now allowed
 		* Fix : Fixed the inversion between Alt and Meta keys when setting a hotkey in option window
 
-Move Tabs 0.3 (2011-01-14)
+Move Tabs 0.3 (2011-01-14): Jerome Reybert <jreybert@gmail.com>
 		* New feature: option panel to choose the shortcuts
 
-Move Tabs 0.2 (2010-07-24)
+Move Tabs 0.2 (2010-07-24): Jerome Reybert <jreybert@gmail.com>
 		* First public release
 		* Nomination requirement: In order to prevent conflicts with other add-ons
 		that may be installed by users, you need to wrap your "lose" variables and
